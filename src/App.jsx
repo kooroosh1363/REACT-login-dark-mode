@@ -5,8 +5,18 @@ import './index.css';
 
 
 function App() {
+
+  const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
+
+  const themeSwitch = () => {
+    const themeNew = theme === 'light' ? 'dark' : 'light';
+    setTheme(themeNew);
+  }
+
+
+
   return (
-    <div className="App">
+    <div className="App" data-theme={theme}>
       <div className="login-form">
         <h1>LOGIN</h1>
         <div className="container">
@@ -41,8 +51,7 @@ function App() {
         </div>
 
         <div className="toggle-theme">
-          <h2>Light Theme</h2>
-          <i class="fas fa-toggle-on"></i>
+          <i onClick={themeSwitch} class="fas fa-toggle-on"></i>
         </div>
       </div>
     </div>
