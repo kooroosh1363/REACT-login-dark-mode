@@ -23,6 +23,7 @@ function App() {
           <form action="">
             <label>Email</label>
             <input type="email" placeholder="Please Enter Your Name" />
+            <label>Password</label>
             <input type="password" placeholder="Please Enter Your Password" />
             <div className="remember">
               <input type="checkbox" checked="checked" />
