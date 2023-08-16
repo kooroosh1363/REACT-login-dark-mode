@@ -1,3 +1,15 @@
+
+:root{
+  --bg_round:rgb(194, 222, 220);
+  --pri_text: #262525;
+  --sec_text:rgb(17, 106, 123);
+  --acc : rgb(236, 229, 199);
+  --border: #251c1c;
+  --bg_form:rgb(205, 194, 174);
+  
+  
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,7 +19,4 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+
