@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# AuthSurface — Accessible Sign-In State Machine
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+AuthSurface modernizes the original 2023 React dark-mode login exercise into a focused front-end authentication UX demo.
 
-## Available Scripts
+## Focus
 
-In the project directory, you can run:
+This repository demonstrates the client-side boundary of sign-in:
 
-### `npm start`
+- deterministic email/password validation
+- explicit form states: idle, invalid, submitting, success
+- password visibility control
+- remembered email only
+- password is never persisted
+- System / Light / Dark theme preferences
+- live response to system color-scheme changes
+- accessible labels, errors, status messages, and focus states
+- responsive layout
+- reduced-motion support
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+It intentionally does **not** pretend to provide real authentication.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Why the upgrade was needed
 
-### `npm test`
+The original version used Create React App, had a broken local-storage hook call, JSX `class` attributes, a controlled checkbox without change handling, an obsolete test looking for "learn react", external font/icon assumptions, and no meaningful validation or submission state model.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Architecture
 
-### `npm run build`
+```text
+auth-policy.js
+  ├── validation
+  └── form state machine
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+theme-policy.js
+  └── System / Light / Dark resolution
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+remembered-email.js
+  └── email-only persistence
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+App.jsx
+  └── accessible React UI
+```
 
-### `npm run eject`
+## Security boundary
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This is a front-end demo. A production sign-in flow should send credentials over HTTPS to a trusted identity/backend service and receive a server-managed session.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+AuthSurface never stores passwords. The optional "Remember email" control persists only the normalized email address.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Local development
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+## Tests
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm test
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The suite covers validation, state transitions, theme resolution, email persistence, password visibility, invalid-form feedback, successful demo submission, and theme switching.
 
-### Code Splitting
+## Production build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run build
+```
 
-### Analyzing the Bundle Size
+## GitHub Pages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Enable **Settings → Pages → Source → GitHub Actions**, then run **Actions → Deploy Pages → Run workflow**.
 
-### Making a Progressive Web App
+## Scope
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+No OAuth, real sessions, password reset, account creation, backend authentication, credential verification, or production identity provider is implemented.
 
-### Advanced Configuration
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT.
