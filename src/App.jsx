@@ -5,9 +5,10 @@ import { readTheme, resolveTheme, writeTheme } from "./lib/theme-policy";
 
 function useResolvedTheme() {
   const [preference, setPreference] = useState(() => readTheme());
-  const [prefersDark, setPrefersDark] = useState(
-    () => window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false
-  );
+  const [prefersDark, setPrefersDark] = useState(() => {
+    const media = window.matchMedia?.("(prefers-color-scheme: dark)");
+    return Boolean(media?.matches);
+  });
 
   useEffect(() => {
     const media = window.matchMedia?.("(prefers-color-scheme: dark)");
